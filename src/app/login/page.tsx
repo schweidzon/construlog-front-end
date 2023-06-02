@@ -6,6 +6,7 @@ import axios from "axios";
 import api from "../../services/api";
 import { useRouter } from "next/navigation";
 import AppContext from "@/contexts/AppContext";
+import Link from "next/link";
 
 export default function signIn() {
   const [email, setEmail] = useState("");
@@ -37,19 +38,19 @@ export default function signIn() {
 
   async function checkClientOrAdm(userId: number, userType: string) {
     try {
-      const result = await api.get("/clients", {
-        params: { user_id: userId },
-      });
-      console.log("oi2");
-      console.log(result.data);
       if (userType === "admin") {
+        await api.get("/admins", {
+          params: { user_id: userId },
+        });
         console.log("admin");
         router.push("/constructions");
       } else {
+        await api.get("/clients", {
+          params: { user_id: userId },
+        });
         console.log("oi");
         router.push("/constructions_diary");
       }
-      return result;
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === "Request failed with status code 404") {
@@ -133,6 +134,14 @@ export default function signIn() {
               >
                 Sign in
               </button>
+              <p>Não tem cadastro? </p>
+              <Link
+                href="/signup"
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-5"
+              >
+                Cadastre-se!
+              </Link>
             </div>
           </form>
         </div>

@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 import api from "../../services/api";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function signUp() {
   const [email, setEmail] = useState("");
@@ -119,6 +120,13 @@ export default function signUp() {
               >
                 Sign in
               </button>
+              <Link
+                href="/login"
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-5"
+              >
+                Login
+              </Link>
             </div>
           </form>
         </div>
