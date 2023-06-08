@@ -3,7 +3,7 @@ import AppContext from "@/contexts/AppContext";
 import Head from "next/head";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import api from "../../services/api";
+import api from "../../../services/api";
 
 export default function Constructions() {
   const { user } = useContext(AppContext);
@@ -29,8 +29,8 @@ export default function Constructions() {
       <Head>
         <title>Construções</title>
       </Head>
-        <Link href={"/constructions/signup"} > Registrar construção</Link>
-      <div>Você esta na parte de obras</div>
+        
+      <div>Você esta na parte de obras do cliente</div>
       {constructions.map((c: Construction ) => <div>{c.name}</div>)}
     </>
   );

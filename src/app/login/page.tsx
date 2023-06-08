@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import AppContext from "@/contexts/AppContext";
 import Link from "next/link";
 
-export default function signIn() {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -42,14 +42,14 @@ export default function signIn() {
         await api.get("/admins", {
           params: { user_id: userId },
         });
-        console.log("admin");
+        
         router.push("/constructions");
       } else {
         await api.get("/clients", {
           params: { user_id: userId },
         });
-        console.log("oi");
-        router.push("/constructions_diary");
+       console.log('io')
+        router.push("/constructions/client");
       }
     } catch (error) {
       if (error instanceof Error) {

@@ -1,22 +1,30 @@
 "use client";
 import AppContext from "@/contexts/AppContext";
 import Head from "next/head";
-import Link from "next/link";
 import { useContext, useState } from "react";
 import api from "../../services/api";
 import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function AdminSignUp() {
   const { user } = useContext(AppContext);
   const [name, setName] = useState("");
   const [job, setJob] = useState("");
-  const router = useRouter()
-  console.log(user)
+  const router = useRouter();
+  console.log(user);
 
   async function registerAdmmin() {
-    const result = await api.post("/admins/signup", {name, function: job, user_id: user.id})
-    router.push("/constructions")
-
+    try {
+      const result = await api.post("/admins/signup", {
+        name,
+        job,
+        user_id: user.user.id,
+      });
+      router.push("/constructions");
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
   }
 
   return (
@@ -95,7 +103,6 @@ export default function Home() {
               >
                 Registrar
               </button>
-          
             </div>
           </form>
         </div>
