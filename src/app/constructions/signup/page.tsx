@@ -52,9 +52,6 @@ export default function ConstructionSignUp() {
 
   return (
     <>
-      <Head>
-        <title>Registrar construção</title>
-      </Head>
       <form
         className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm"
         onSubmit={registerConstruction}
@@ -83,6 +80,7 @@ export default function ConstructionSignUp() {
           onChange={handleSelect}
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mt-5"
         >
+          <option></option>
           {clients.map((c: Client) => (
             <option value={c.id} key={c.user_id}>
               {c.name}

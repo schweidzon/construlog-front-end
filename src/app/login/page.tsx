@@ -2,7 +2,6 @@
 
 import Head from "next/head";
 import { useContext, useState } from "react";
-import axios from "axios";
 import api from "../../services/api";
 import { useRouter } from "next/navigation";
 import AppContext from "@/contexts/AppContext";
@@ -23,7 +22,7 @@ export default function SignIn() {
 
       alert("Login feito com sucesso");
       await checkClientOrAdm(resp.data.user.id, resp.data.user.user_type);
-      console.log("poi");
+     
     } catch (error) {
       if (error instanceof Error) {
         if (error.message === `Request failed with status code 409`)

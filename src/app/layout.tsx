@@ -18,7 +18,7 @@ export default function RootLayout({
     <>
       <AppContext.Provider value= {{user, setUser}}>
         <html lang="pt-br">
-          <body className={"bg-slate-500"}>{children}</body>
+          <body>{children}</body>
         </html>
       </AppContext.Provider>
     </>
