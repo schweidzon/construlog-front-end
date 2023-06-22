@@ -84,7 +84,6 @@ export default function ConstructionSignUp() {
           {clients.map((c: Client) => (
             <option value={c.id} key={c.user_id}>
               {c.name}
-              {c.id}
             </option>
           ))}
         </select>

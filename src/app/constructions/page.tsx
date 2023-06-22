@@ -38,8 +38,43 @@ export default function Constructions() {
         <title>Construções</title>
       </Head>
 
+      <table className="w-6/12 whitespace-no-wrap m-auto min-w-[300px] mt-20">
+        <thead>
+          <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <th
+              className="px-4 py-3 border border-solid border-black border-1 text-center bg-gray-300 text-base"
+              colSpan="2"
+            >
+              Obras
+            </th>
+          </tr>
+          <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <th className="px-4 text-base py-3 border border-solid border-black border-1">
+              Nome
+            </th>
+            <th className="px-4 text-base py-3 border border-solid border-black border-1">
+              Cliente
+            </th>
+          </tr>
+        </thead>
+        <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+          {constructions.map((c: Construction) => (
+            <tr className="text-gray-700 dark:text-gray-400 border border-solid border-black border-1">
+              <td className="px-4 py-3 border border-solid border-black border-1">
+                <Link href={`/constructions-diary/${c.id}`}>{c.name}</Link>
+              </td>
+
+              <td className="px-4 py-3 border border-solid border-black border-1">
+                <Link href={`/constructions-diary/${c.id}`}>
+                  {c.clients.name}
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
       <div className="flex justify-center items-center gap-10 flex-col mt-10 mb-10">
-        <h1>Você esta na parte de obras</h1>
         <button>
           <Link
             href={"/constructions/signup"}
@@ -48,40 +83,6 @@ export default function Constructions() {
             Registrar nova obra
           </Link>
         </button>
-      </div>
-      <div className="flex justify-center">
-        <ul className="bg-gray-100 rounded w-6/12 divide-y divide-gray-900 divide-opacity-25 ">
-          {constructions.map((c: Construction) => (
-            <li className="px-4 py-2 flex justify-between items-center mb-5 text-gray-800">
-              <div className="flex justify-around gap-20 items-center space-x-4 w-full">
-                <div className="flex-shrink-0">
-                  <p>{c.name}</p>
-                </div>
-                <div className=" min-w-0">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    Cliente
-                  </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {c.clients.name}
-                  </p>
-                </div>
-                <Link href={`/constructions-diary/${c.id}`}>
-                  <svg
-                    className="h-5 w-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </Link>
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
     </>
   );

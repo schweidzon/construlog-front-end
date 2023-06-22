@@ -1,11 +1,12 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import api from "../../../services/api";
 import Link from "next/link";
 import AppContext from "@/contexts/AppContext";
 
 export default function Diary() {
+  const router = useRouter();
   const [constructionDiary, setConstructionDiary] = useState([]);
   const { user } = useContext(AppContext);
 
@@ -20,53 +21,66 @@ export default function Diary() {
       .catch((err) => console.log(err));
   }, []);
 
+  console.log(constructionDiary);
+
   return (
-    <>
+    <div className="mt-20 flex flex-col items-center w-6/12 justify-center m-auto min-w-[300px]">
+      <>
+        {constructionDiary.length === 0 ? (
+          <div>Não tem nenhum resgistro de diário</div>
+        ) : (
+          <table className="w-full whitespace-no-wrap">
+            <thead>
+              <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                <th className="px-4 py-3 border border-solid border-black border-1 text-center bg-gray-300 text-base">
+                  Diário de obra
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+              {constructionDiary.map((d: any) => (
+                <tr
+                  className="text-gray-700 dark:text-gray-400 border border-solid border-black border-1"
+                  key={d.id}
+                >
+                  <td className="px-4 py-3 border border-solid border-black border-1 flex justify-between">
+                    {d.date.split("T")[0].replaceAll("-", "/")}
+                    {d.activities.length > 0 ? (
+                      <Link href={`/constructions-diary/diary/${d.id}`}>
+                        <h1>Abrir diário</h1>
+                      </Link>
+                    ) : user.user.user_type !== "admin" ? (
+                      <div>Sem log registrado no momento</div>
+                    ) : (
+                      <Link
+                        className="cursor"
+                        href={`/constructions-diary/signup/${d.id}`}
+                      >
+                        Registrar diário
+                      </Link>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </>
+
       {user.user.user_type === "admin" && (
-        <Link href={`/constructions-diary/diary/create/${id}`}>
-          Registrar diário
+        <Link
+          className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+          href={`/constructions-diary/diary/create/${id}`}
+        >
+          Registrar novo diário
         </Link>
       )}
-
-      <div>
-        {!constructionDiary ? (
-          <div>N tem</div>
-        ) : (
-          <ul className="bg-gray-100 rounded w-6/12 divide-y divide-gray-900 divide-opacity-25 ">
-            {constructionDiary.map((c: any) => (
-              <li className="px-4 py-2 flex justify-between items-center mb-5 text-gray-800">
-                <div className="flex justify-around gap-20 items-center space-x-4 w-full">
-                  <div className="flex-shrink-0">
-                    <p>{c.date.split("T")[0].replaceAll("-", "/")}</p>
-                  </div>
-
-                  {c.activities.length > 0 ? (
-                    <Link href={`/constructions-diary/diary/${c.id}`}>
-                      <svg
-                        className="h-5 w-60"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                          clip-rule="evenodd"
-                        ></path>
-                      </svg>
-                    </Link>
-                  ) : user.user.user_type !== "admin" ? (
-                    <div>Sem log registrado no momento</div>
-                  ) : (
-                    <Link href={`/constructions-diary/signup/${c.id}`}>
-                      Registrar log
-                    </Link>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </>
+      <button
+        className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+        onClick={() => router.back()}
+      >
+        Voltar
+      </button>
+    </div>
   );
 }
