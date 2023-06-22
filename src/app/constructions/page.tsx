@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { BiRightArrow } from "react-icons/bi";
+import { LogOutHeader } from "@/components/LogOutHeader";
 
 export default function Constructions() {
   const { user } = useContext(AppContext);
@@ -34,11 +35,9 @@ export default function Constructions() {
   console.log(constructions);
   return (
     <>
-      <Head>
-        <title>Construções</title>
-      </Head>
+     <LogOutHeader/>
 
-      <table className="w-6/12 whitespace-no-wrap m-auto min-w-[300px] mt-20">
+      <table className="w-6/12 whitespace-no-wrap m-auto min-w-[300px] mt-40 ">
         <thead>
           <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
             <th

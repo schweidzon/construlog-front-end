@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useContext, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { useRouter } from "next/navigation";
+import { LogOutHeader } from "@/components/LogOutHeader";
 
 export default function ConstructionSignUp() {
   const { user } = useContext(AppContext);
@@ -52,8 +53,9 @@ export default function ConstructionSignUp() {
 
   return (
     <>
+    <LogOutHeader/>
       <form
-        className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm"
+        className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm mt-40 border boder-solid p-10"
         onSubmit={registerConstruction}
       >
         <div>

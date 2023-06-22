@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import api from "../../../services/api";
 import Link from "next/link";
 import AppContext from "@/contexts/AppContext";
+import { LogOutHeader } from "@/components/LogOutHeader";
 
 export default function Diary() {
   const router = useRouter();
@@ -24,7 +25,9 @@ export default function Diary() {
   console.log(constructionDiary);
 
   return (
-    <div className="mt-20 flex flex-col items-center w-6/12 justify-center m-auto min-w-[300px]">
+    <>
+    <LogOutHeader/>
+    <div className="mt-20 flex flex-col items-center w-6/12 justify-center m-auto min-w-[300px] mt-40">
       <>
         {constructionDiary.length === 0 ? (
           <div>Não tem nenhum resgistro de diário</div>
@@ -82,5 +85,7 @@ export default function Diary() {
         Voltar
       </button>
     </div>
+    </>
+    
   );
 }
