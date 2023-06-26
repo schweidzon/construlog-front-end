@@ -52,7 +52,7 @@ export default function DiaryLog() {
               <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                 <th
                   className="px-4 py-3 border border-solid border-black border-1 text-center bg-gray-300 text-base"
-                  colSpan="2"
+                  colSpan={2}
                 >
                   Mão de obra
                 </th>

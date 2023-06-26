@@ -16,7 +16,7 @@ export default function ClientSignUp() {
         name,
         user_id: user.user.id,
       });
-      router.push("/constructions-diary");
+      router.push("/constructions/client");
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message);

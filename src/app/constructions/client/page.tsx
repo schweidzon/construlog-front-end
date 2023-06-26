@@ -1,11 +1,10 @@
 "use client";
 import AppContext from "@/contexts/AppContext";
-import Head from "next/head";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import api from "../../../services/api";
 import { LogOutHeader } from "@/components/LogOutHeader";
-const imageUrl = "http://localhost:5000/files/test.jpg";
+
 
 export default function Constructions() {
   const { user } = useContext(AppContext);
@@ -22,6 +21,7 @@ export default function Constructions() {
         console.log(res.data);
         setConstructions(res.data);
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   type Construction = {
     id: number;
@@ -41,7 +41,7 @@ export default function Constructions() {
           <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
             <th
               className="px-4 py-3 border border-solid border-black border-1 text-center bg-gray-300 text-base"
-              colSpan="2"
+              colSpan={2}
             >
               Obras
             </th>
@@ -57,7 +57,7 @@ export default function Constructions() {
         </thead>
         <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
           {constructions.map((c: any) => (
-            <tr className="text-gray-700 dark:text-gray-400 border border-solid border-black border-1">
+            <tr className="text-gray-700 dark:text-gray-400 border border-solid border-black border-1" key={c.id}>
               <td className="px-4 py-3 border border-solid border-black border-1">
                 <Link href={`/constructions-diary/${c.id}`}>{c.name}</Link>
               </td>

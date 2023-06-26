@@ -16,6 +16,7 @@ export default function Diary() {
       .get(`/constructions-diary/${id}`)
       .then((res) => setConstructionDiary(res.data))
       .catch((err) => console.log(err));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(constructionDiary);
@@ -23,10 +24,10 @@ export default function Diary() {
   return (
     <>
       <Link href={`/constructions-diary/signup/${id}`}>Registrar diário</Link>
-      <div>{!constructionDiary ? <div>N tem</div> : 
+      <div>{!constructionDiary ? <div >Não possui nenhum registro</div> : 
        <ul className="bg-gray-100 rounded w-6/12 divide-y divide-gray-900 divide-opacity-25 ">
        {constructionDiary.map((c: any) => (
-         <li className="px-4 py-2 flex justify-between items-center mb-5 text-gray-800">
+         <li className="px-4 py-2 flex justify-between items-center mb-5 text-gray-800" key={c.id}>
            <div className="flex justify-around gap-20 items-center space-x-4 w-full">
              <div className="flex-shrink-0">
                <p>{c.name}</p>

@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import AppContext from "@/contexts/AppContext";
 import Link from "next/link";
 
-export default function createDiaryLog() {
+export default function CreateDiaryLog() {
 
   const router = useRouter();
   const [date, setDate] = useState("")
